@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --erp-bg: #f8fafc;
+  --erp-sidebar: #ffffff;
+  --erp-card: #ffffff;
+  --erp-card-rgb: 255, 255, 255;
+  --erp-text-main: #1e293b;
+  --erp-text-muted: #64748b;
+  --erp-border: #e2e8f0;
+  color-scheme: light;
+}
+
+.dark {
+  --erp-bg: #1a2234;
+  --erp-sidebar: #222d44;
+  --erp-card: #2d3a54;
+  --erp-card-rgb: 45, 58, 84;
+  --erp-text-main: #e2e8f0;
+  --erp-text-muted: #94a3b8;
+  --erp-border: rgba(255, 255, 255, 0.05);
+  color-scheme: dark;
+}
+
+body {
+  @apply bg-erp-bg text-erp-text-main font-sans antialiased overflow-x-hidden transition-colors duration-300;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-erp-bg;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-erp-card rounded-full;
+  border: 1px solid var(--erp-border);
+}
+
+.glass-card {
+  @apply backdrop-blur-md rounded-xl shadow-sm dark:shadow-none;
+  background-color: rgba(var(--erp-card-rgb), 0.8);
+  border: 1px solid var(--erp-border);
+}
+
+.sidebar-link-active {
+  @apply bg-erp-accent/10 text-erp-accent border-r-4 border-erp-accent;
+}
