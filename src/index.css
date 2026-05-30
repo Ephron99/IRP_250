@@ -4,7 +4,9 @@
 
 :root {
   --erp-bg: #f8fafc;
-  --erp-sidebar: #ffffff;
+  --erp-sidebar: #1e40af;
+  --erp-sidebar-text: #ffffff;
+  --erp-sidebar-text-muted: rgba(255, 255, 255, 0.7);
   --erp-card: #ffffff;
   --erp-card-rgb: 255, 255, 255;
   --erp-text-main: #1e293b;
@@ -16,6 +18,8 @@
 .dark {
   --erp-bg: #1a2234;
   --erp-sidebar: #222d44;
+  --erp-sidebar-text: #e2e8f0;
+  --erp-sidebar-text-muted: #94a3b8;
   --erp-card: #2d3a54;
   --erp-card-rgb: 45, 58, 84;
   --erp-text-main: #e2e8f0;

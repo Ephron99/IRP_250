@@ -1,23 +1,27 @@
-import React from 'react';
-import { Search, Bell, User, Calendar, Moon, Sun } from 'lucide-react';
+import { Search, Bell, User, Moon, Sun, Menu } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import i18n from '../../i18n/config';
 import { useTheme } from '../../context/ThemeContext';
+import { useLayout } from '../../context/LayoutContext';
+import { useAuth } from '../../context/AuthContext';
 
 const Header = () => {
   const { t } = useTranslation();
   const { theme, toggleTheme } = useTheme();
-  const today = new Date().toLocaleDateString('en-US', { 
-    month: 'short', 
-    day: 'numeric', 
-    year: 'numeric' 
-  });
+  const { toggleSidebar } = useLayout();
+  const { user } = useAuth();
 
   return (
-    <header className="h-16 bg-erp-bg/80 backdrop-blur-md border-b border-erp-border flex items-center justify-between px-8 sticky top-0 z-40 transition-colors duration-300">
+    <header className="h-16 bg-erp-bg/80 backdrop-blur-md border-b border-erp-border flex items-center justify-between px-4 md:px-8 sticky top-0 z-40 transition-colors duration-300">
       <div className="flex items-center gap-4">
-        <h2 className="text-lg font-medium text-erp-text-main">
-          {t('Welcome')}, Ephron - X Hotel
+        <button 
+          onClick={toggleSidebar}
+          className="lg:hidden p-2 text-erp-text-muted hover:text-erp-text-main hover:bg-erp-bg/50 rounded-lg transition-all"
+        >
+          <Menu size={24} />
+        </button>
+        <h2 className="text-lg font-medium text-erp-text-main hidden sm:block">
+          {t('Welcome')}, {user?.name || 'Alex Johnson'} - X Hotel
         </h2>
       </div>
 

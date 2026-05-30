@@ -1,18 +1,16 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Search, 
   Plus, 
   UserPlus, 
   Bed, 
-  Calendar, 
-  MoreHorizontal,
   Filter,
   CheckCircle2,
   Clock,
-  AlertCircle
+  AlertCircle,
+  MoreHorizontal
 } from 'lucide-react';
-import { useTranslation } from 'react-i18next';
 
 interface Guest {
   id: string;
@@ -33,7 +31,6 @@ const initialGuests: Guest[] = [
 ];
 
 const FrontOffice = () => {
-  const { t } = useTranslation();
   const [guests] = useState<Guest[]>(initialGuests);
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -49,7 +46,7 @@ const FrontOffice = () => {
 
   return (
     <motion.div 
-      className="p-8 space-y-8 min-h-screen bg-erp-bg transition-colors duration-300"
+      className="p-4 md:p-8 space-y-8 min-h-screen bg-erp-bg transition-colors duration-300"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
@@ -118,7 +115,7 @@ const FrontOffice = () => {
             <tbody className="divide-y divide-erp-border">
               {guests.map((guest) => (
                 <tr key={guest.id} className="group hover:bg-erp-bg/50 transition-all cursor-pointer">
-                  {/* <td className="py-4 px-6">
+                  <td className="py-4 px-6">
                     <div className="flex items-center gap-3">
                       <div className="w-8 h-8 rounded-full bg-erp-accent/10 flex items-center justify-center text-erp-accent font-bold text-xs">
                         {guest.name.charAt(0)}
@@ -141,7 +138,7 @@ const FrontOffice = () => {
                     <button className="p-1 text-erp-text-muted hover:text-erp-text-main transition-colors">
                       <MoreHorizontal size={18} />
                     </button>
-                  </td> */}
+                  </td>
                 </tr>
               ))}
             </tbody>

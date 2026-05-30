@@ -13,9 +13,28 @@ const Login = () => {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate login
-    login();
-    navigate('/');
+    
+    let role: 'admin' | 'hr' | 'finance' = 'admin';
+    let name = 'Admin User';
+
+    if (email.includes('hr')) {
+      role = 'hr';
+      name = 'HR Manager';
+    } else if (email.includes('finance')) {
+      role = 'finance';
+      name = 'Finance Director';
+    }
+
+    login(email, role, name);
+
+    // Redirect based on role
+    if (role === 'hr') {
+      navigate('/hr');
+    } else if (role === 'finance') {
+      navigate('/finance');
+    } else {
+      navigate('/');
+    }
   };
 
   return (

@@ -4,9 +4,12 @@ import Sidebar from './components/layout/Sidebar';
 import Header from './components/layout/Header';
 import Dashboard from './pages/Dashboard';
 import FrontOffice from './pages/FrontOffice';
+import HR from './pages/HR';
+import Finance from './pages/Finance';
 import Login from './pages/Login';
 import { ThemeProvider } from './context/ThemeContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import { LayoutProvider } from './context/LayoutContext';
 import './i18n/config';
 
 // Auth Guard component
@@ -20,7 +23,7 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 const AppLayout = ({ children }: { children: React.ReactNode }) => (
   <div className="min-h-screen bg-erp-bg flex transition-colors duration-300">
     <Sidebar />
-    <div className="flex-1 flex flex-col ml-64">
+    <div className="flex-1 flex flex-col lg:ml-64 w-full">
       <Header />
       <main className="flex-1">
         {children}
@@ -31,7 +34,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => (
 
 // Placeholder components for other pages
 const PlaceholderPage = ({ title }: { title: string }) => (
-  <div className="ml-64 p-8 min-h-screen bg-erp-bg flex items-center justify-center">
+  <div className="p-8 min-h-screen bg-erp-bg flex items-center justify-center">
     <div className="text-center">
       <h1 className="text-4xl font-bold text-erp-text-main mb-4">{title}</h1>
       <p className="text-erp-text-muted">This module is coming soon...</p>
@@ -42,7 +45,8 @@ const PlaceholderPage = ({ title }: { title: string }) => (
 function App() {
   return (
     <AuthProvider>
-      <ThemeProvider>
+      <LayoutProvider>
+        <ThemeProvider>
         <Router>
           <Routes>
             <Route path="/login" element={<Login />} />
@@ -73,13 +77,13 @@ function App() {
             
             <Route path="/hr" element={
               <ProtectedRoute>
-                <AppLayout><PlaceholderPage title="Human Resources" /></AppLayout>
+                <AppLayout><HR /></AppLayout>
               </ProtectedRoute>
             } />
             
             <Route path="/finance" element={
               <ProtectedRoute>
-                <AppLayout><PlaceholderPage title="Accounting & Finance" /></AppLayout>
+                <AppLayout><Finance /></AppLayout>
               </ProtectedRoute>
             } />
             
@@ -116,7 +120,8 @@ function App() {
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Router>
-      </ThemeProvider>
+        </ThemeProvider>
+      </LayoutProvider>
     </AuthProvider>
   );
 }

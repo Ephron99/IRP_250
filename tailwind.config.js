@@ -11,6 +11,8 @@ export default {
         // Dark Mode Colors
         'erp-bg': 'var(--erp-bg)',
         'erp-sidebar': 'var(--erp-sidebar)',
+        'erp-sidebar-text': 'var(--erp-sidebar-text)',
+        'erp-sidebar-text-muted': 'var(--erp-sidebar-text-muted)',
         'erp-card': 'var(--erp-card)',
         'erp-text-main': 'var(--erp-text-main)',
         'erp-text-muted': 'var(--erp-text-muted)',

@@ -3,19 +3,16 @@ import { useTranslation } from 'react-i18next';
 import { 
   LineChart, Line, AreaChart, Area, BarChart, Bar, 
   PieChart, Pie, Cell, ResponsiveContainer, 
-  XAxis, YAxis, CartesianGrid, Tooltip, Legend 
+  XAxis, YAxis, CartesianGrid, Tooltip 
 } from 'recharts';
 import { 
-  TrendingUp, 
-  Users, 
-  DollarSign, 
   Star, 
-  ArrowUpRight, 
-  ArrowDownRight,
   MoreVertical,
   Calendar
 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useAuth } from '../context/AuthContext';
+import { Navigate } from 'react-router-dom';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -43,16 +40,6 @@ const occupancyData = [
   { name: 'Fri', value: 92 },
   { name: 'Sat', value: 95 },
   { name: 'Sun', value: 88 },
-];
-
-const revenueData = [
-  { name: 'Mon', revenue: 45000 },
-  { name: 'Tue', revenue: 52000 },
-  { name: 'Wed', revenue: 48000 },
-  { name: 'Thu', revenue: 61000 },
-  { name: 'Fri', revenue: 75000 },
-  { name: 'Sat', revenue: 82000 },
-  { name: 'Sun', revenue: 58000 },
 ];
 
 const roomStatusData = [
@@ -94,10 +81,14 @@ const maintenanceData = [
 
 const Dashboard = () => {
   const { t } = useTranslation();
+  const { user } = useAuth();
+
+  if (user?.role === 'hr') return <Navigate to="/hr" replace />;
+  if (user?.role === 'finance') return <Navigate to="/finance" replace />;
 
   return (
     <motion.div 
-      className="p-8 space-y-8 min-h-screen bg-erp-bg transition-colors duration-300"
+      className="p-4 md:p-8 space-y-8 min-h-screen bg-erp-bg transition-colors duration-300"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
@@ -406,7 +397,6 @@ const StatCard = ({ title, value, subtitle, chart }: { title: string, value: str
 );
 
 const GaugeChart = ({ value }: { value: number }) => {
-  const angle = (value / 100) * 180;
   return (
     <div className="relative h-20 w-full flex items-center justify-center overflow-hidden">
       <div className="absolute bottom-0 w-32 h-16 border-[12px] border-erp-bg rounded-t-full"></div>
